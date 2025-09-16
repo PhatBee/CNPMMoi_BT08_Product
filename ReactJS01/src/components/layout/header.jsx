@@ -53,7 +53,7 @@ const Header = () => {
         console.log("click ", e);
         setCurrent(e.key);
     }
-    return <Menu onClick={onClick} selectedKeys={[current]} />
+    return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
 };
 
 export default Header;

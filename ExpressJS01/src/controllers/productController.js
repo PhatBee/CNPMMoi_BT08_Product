@@ -5,6 +5,15 @@ const Product = require('../models/product');
 
 async function listProducts(req, res) {
     try {
+        // Reindex products if needed
+        // Xóa index cũ (nếu cần)
+        await esClient.indices.delete({ index: 'products' }, { ignore: [404] });
+        const products = await Product.find();
+        for (const p of products) {
+            await indexProduct(p);
+        }
+        console.log("Reindexed all products into Elasticsearch");
+
         const { category, page = 1, limit = 12 } = req.query;
         const pageNum = Math.max(1, parseInt(page, 10) || 1);
         const limitNum = Math.max(1, parseInt(limit, 10) || 12);

@@ -84,7 +84,7 @@ const LoginPage = () => {
                     <Link to={"/"}><ArrowLeftOutlined /> Quay lại trang chủ</Link>
                     <Divider />
                     <div style={{ textAlign: "center" }}>
-                        Đã có tài khoản? <Link to={"/login"}>Đăng nhập</Link>
+                        Bạn chưa có tài khoản? <Link to={"/register"}>Đăng ký</Link>
                     </div>
                 </fieldset>
             </Col>

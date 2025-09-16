@@ -70,16 +70,28 @@ export default function AllProducts() {
             Tất cả
           </button>
           <button
-            onClick={() => changeCategory("skincare")}
-            disabled={currentCategory === "skincare"}
+            onClick={() => changeCategory("Chăm sóc")}
+            disabled={currentCategory === "Chăm sóc"}
           >
-            Skincare
+            Chăm sóc
           </button>
           <button
-            onClick={() => changeCategory("makeup")}
-            disabled={currentCategory === "makeup"}
+            onClick={() => changeCategory("Đồ chơi")}
+            disabled={currentCategory === "Đồ chơi"}
           >
-            Makeup
+            Đồ chơi
+          </button>
+          <button
+            onClick={() => changeCategory("Phụ kiện")}
+            disabled={currentCategory === "Phụ kiện"}
+          >
+            Phụ kiện
+          </button>
+          <button
+            onClick={() => changeCategory("Thức ăn")}
+            disabled={currentCategory === "Thức ăn"}
+          >
+            Thức ăn
           </button>
         </div>
       )}

@@ -32,6 +32,7 @@ async function indexProduct(product) {
       price: product.price,
       discount: product.discount,
       views: product.views,
+      image: product.image
     },
   });
 }

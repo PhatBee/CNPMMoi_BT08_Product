@@ -1,4 +1,4 @@
-const { getProductsPaginated, indexProduct } = require('../services/productService');
+const { getProductsPaginated, indexProduct, getCategoriesService } = require('../services/productService');
 const esClient = require('../configs/elasticsearch');
 const Product = require('../models/product');
 
@@ -55,7 +55,11 @@ async function reindexAllProducts(req, res) {
 
 async function searchProducts(req, res) {
     try {
-        const { keyword, category, minPrice, maxPrice, discount, minViews } = req.query;
+       const { keyword, category, minPrice, maxPrice, discount, minViews, page = 1, limit = 12 } = req.query;
+
+        const pageNum = Math.max(1, parseInt(page, 10) || 1);
+        const limitNum = Math.max(1, parseInt(limit, 10) || 12);
+        const from = (pageNum - 1) * limitNum;
 
         const mustQuery = [];
 
@@ -74,7 +78,7 @@ async function searchProducts(req, res) {
         // Lọc theo danh mục
         if (category && category !== 'all') {
             mustQuery.push({
-                term: { category }
+                match: { category }
             });
         }
 
@@ -86,19 +90,19 @@ async function searchProducts(req, res) {
             mustQuery.push({ range: { price: range } });
         }
 
-        // Lọc theo giảm giá
-        if (discount) {
-            mustQuery.push({
-                range: { discount: { gte: parseFloat(discount) } }
-            });
-        }
+        // // Lọc theo giảm giá
+        // if (discount) {
+        //     mustQuery.push({
+        //         range: { discount: { gte: parseFloat(discount) } }
+        //     });
+        // }
 
-        // Lọc theo số lượt xem
-        if (minViews) {
-            mustQuery.push({
-                range: { views: { gte: parseInt(minViews) } }
-            });
-        }
+        // // Lọc theo số lượt xem
+        // if (minViews) {
+        //     mustQuery.push({
+        //         range: { views: { gte: parseInt(minViews) } }
+        //     });
+        // }
 
         // Nếu không có filter nào -> lấy tất cả
         const queryBody = mustQuery.length > 0
@@ -108,11 +112,10 @@ async function searchProducts(req, res) {
         const result = await esClient.search({
             index: "products",
             body: {
-                query: {
-                    bool: {
-                        must: queryBody
-                    }
-                }
+                query: queryBody,
+                from,
+                size: limitNum,
+                
             }
         });
 
@@ -121,12 +124,30 @@ async function searchProducts(req, res) {
             ...hit._source
         }));
 
-        res.json(products);
+        console.log("Search filters:", { keyword, category, minPrice, maxPrice, discount, minViews });
+        console.log("Search result:", products);
+
+        res.json({
+            products,
+            page: pageNum,
+            limit: limitNum,
+            totalItems: result.hits.total.value,
+            totalPages: Math.ceil(result.hits.total.value / limitNum)
+        });
     } catch (err) {
         console.error('searchProducts error', err);
         res.status(500).json({ message: 'Server error' });
     }
 }
 
+async function getCategories(req, res) {
+    try {
+        const categories = await getCategories();
+        res.json(categories);
+    } catch (err) {
+        console.error('getCategories error', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
 
-module.exports = { listProducts, searchProducts, reindexAllProducts };
+module.exports = { listProducts, searchProducts, reindexAllProducts, getCategories };

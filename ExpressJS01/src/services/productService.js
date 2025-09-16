@@ -37,4 +37,9 @@ async function indexProduct(product) {
   });
 }
 
-module.exports = { getProductsPaginated, indexProduct };
+async function getCategoriesService() {
+  const categories = await Product.distinct('category');
+  return categories;
+}
+
+module.exports = { getProductsPaginated, indexProduct, getCategoriesService };

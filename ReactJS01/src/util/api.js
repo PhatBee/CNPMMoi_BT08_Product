@@ -63,3 +63,15 @@ export const getMeApi = async (token) => {
         return null;
     }
 };
+
+export const getCategoriesApi = async () => {
+    const URL_API = "/v1/api/products/categories";
+    try {
+        const res = await axios.get(URL_API);
+        console.log("Get categories raw: ", res);
+        return res;
+    } catch (err) {
+        console.error("Get categories error: ", err);
+        return [];
+    }
+};

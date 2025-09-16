@@ -42,4 +42,11 @@ async function getCategoriesService() {
   return categories;
 }
 
-module.exports = { getProductsPaginated, indexProduct, getCategoriesService };
+async function getProductByIdService(productId) {
+  if (!productId) throw new Error("Product ID is required");
+  const product = await Product.findById(productId).lean();
+  if (!product) throw new Error("Product not found");
+  return product;
+}
+
+module.exports = { getProductsPaginated, indexProduct, getCategoriesService, getProductByIdService };

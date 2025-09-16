@@ -1,4 +1,4 @@
-const { getProductsPaginated, indexProduct, getCategoriesService } = require('../services/productService');
+const { getProductsPaginated, indexProduct, getCategoriesService, getProductByIdService } = require('../services/productService');
 const esClient = require('../configs/elasticsearch');
 const Product = require('../models/product');
 
@@ -142,7 +142,7 @@ async function searchProducts(req, res) {
 
 async function getCategories(req, res) {
     try {
-        const categories = await getCategories();
+        const categories = await getCategoriesService();
         res.json(categories);
     } catch (err) {
         console.error('getCategories error', err);
@@ -150,4 +150,20 @@ async function getCategories(req, res) {
     }
 }
 
-module.exports = { listProducts, searchProducts, reindexAllProducts, getCategories };
+async function getProductById(req, res) {
+    try {
+        const { id } = req.params;
+        const product = await getProductByIdService(id);
+
+        // Tang views
+        product.views = (product.views || 0) + 1;
+        await Product.findByIdAndUpdate(id, { views: product.views });
+
+        res.json(product);
+    } catch (err) {
+        console.error('getProductById error', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+
+module.exports = { listProducts, searchProducts, reindexAllProducts, getCategories, getProductById };

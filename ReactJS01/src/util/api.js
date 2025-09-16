@@ -75,3 +75,15 @@ export const getCategoriesApi = async () => {
         return [];
     }
 };
+
+export const getProductByIdApi = async (id) => {
+    const URL_API = `/v1/api/products/${id}`;
+    try {
+        const res = await axios.get(URL_API);
+        console.log("Get product by ID raw: ", res);
+        return res;
+    } catch (err) {
+        console.error("Get product by ID error: ", err);
+        return null;
+    }
+};

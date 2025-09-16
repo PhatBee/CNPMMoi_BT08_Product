@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard({ product }) {
   return (
-    <Link to={`/products/${product._id}`}>
+    <Link to={`/products/${product.id || product._id}`}>
 
       <Card
         hoverable

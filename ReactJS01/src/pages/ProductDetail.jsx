@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductDetail, clearProductDetail } from "../hook/productDetailSlice";
+import { fetchSimilarProducts } from "../hook/productSlice";
 import { Card, Spin, Alert, Row, Col, Typography, Button } from "antd";
+import ProductCard from "../components/ProductCard";
 
 const { Title, Paragraph } = Typography;
 
@@ -10,9 +12,13 @@ export default function ProductDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector((state) => state.productDetail);
+  const { items: similar, loading: loadingSimilar } = useSelector(
+    (state) => state.similarProducts
+  );
 
   useEffect(() => {
     dispatch(fetchProductDetail(id));
+    dispatch(fetchSimilarProducts(id));
 
     return () => {
       dispatch(clearProductDetail());
@@ -57,6 +63,23 @@ export default function ProductDetail() {
             </Col>
           </Row>
         </Card>
+
+        {/* Sản phẩm tương tự */}
+        <div style={{ marginTop: 30 }}>
+          <Title level={3}>Sản phẩm tương tự</Title>
+          {loadingSimilar ? (
+            <Spin />
+          ) : (
+            <Row gutter={[16, 16]}>
+              {similar.map((p) => (
+                <Col xs={24} sm={12} md={8} lg={6} key={p._id}>
+                  <ProductCard product={p} />
+                </Col>
+              ))}
+            </Row>
+          )}
+        </div>
+
       </Col>
     </Row>
   );

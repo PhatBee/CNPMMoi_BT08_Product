@@ -87,3 +87,15 @@ export const getProductByIdApi = async (id) => {
         return null;
     }
 };
+
+export const getSimilarProductsApi = async (id) => {
+    const URL_API = `/v1/api/products/${id}/similar`;
+    try {
+        const res = await axios.get(URL_API);
+        console.log("Get similar products raw: ", res);
+        return res;
+    } catch (err) {
+        console.error("Get similar products error: ", err);
+        return [];
+    }
+};

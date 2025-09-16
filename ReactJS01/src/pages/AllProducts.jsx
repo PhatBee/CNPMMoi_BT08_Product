@@ -77,7 +77,7 @@ export default function AllProducts() {
           {/* Bộ lọc danh mục */}
           {!isSearching && (
             <div style={{ margin: "16px 0" }}>
-              {["all", "Chăm sóc", "Đồ chơi", "Phụ kiện", "Thức ăn"].map((cat) => (
+              {["all", "Chăm sóc","Chuồng trại", "Đồ chơi", "Phụ kiện", "Thức ăn"].map((cat) => (
                 <Button
                   key={cat}
                   type={currentCategory === cat ? "primary" : "default"}

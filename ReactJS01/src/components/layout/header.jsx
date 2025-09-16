@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { UsergroupAddOutlined, HomeOutlined, SettingOutlined } from "@ant-design/icons";
+import { UsergroupAddOutlined, HomeOutlined, SettingOutlined, HeartOutlined, EyeOutlined, AppstoreOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
@@ -22,9 +22,21 @@ const Header = () => {
         }] : []),
 
         {
-            label: <Link to="/products">Products</Link>,
+            label: <Link to="/products">Danh sách sản phẩm</Link>,
             key: "products",
-            icon: <SettingOutlined />,
+            icon: <AppstoreOutlined />,
+        },
+
+        {
+            label: <Link to="/favorite">Sản phẩm yêu thích</Link>,
+            key: "favorite",
+            icon: <HeartOutlined />,
+        },
+
+        {
+            label: <Link to="/watched">Sản phẩm đã xem</Link>,
+            key: "watched",
+            icon: <EyeOutlined />,
         },
 
         {

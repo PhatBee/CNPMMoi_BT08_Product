@@ -72,6 +72,86 @@ const sampleProducts = [
     discount: 10,
     views: 250,
   },
+  {
+    name: "Thức ăn hạt cho chó Royal Canin",
+    price: 250000,
+    category: "Thức ăn",
+    image: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTExL3Jhd3BpeGVsX29mZmljZV8zNV9hX2N1dGVfZG9nX2FuZF9jYXRfc2l0dGluZ190b2dldGhlcl9pc29sYXRlZF82NTdiZmRjZC0xNzQ3LTRlNjktODc1MC0wYTk3ODliYzE2NDEucG5n.png",
+    discount: 10,
+    views: 420
+  },
+  {
+    name: "Dầu gội khô cho mèo Trixie",
+    price: 130000,
+    category: "Chăm sóc",
+    image: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTExL3Jhd3BpeGVsX29mZmljZV8zNV9hX2N1dGVfZG9nX2FuZF9jYXRfc2l0dGluZ190b2dldGhlcl9pc29sYXRlZF82NTdiZmRjZC0xNzQ3LTRlNjktODc1MC0wYTk3ODliYzE2NDEucG5n.png",
+    discount: 25,
+    views: 280
+  },
+  {
+    name: "Bóng cao su phát sáng cho chó",
+    price: 45000,
+    category: "Đồ chơi",
+    image: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTExL3Jhd3BpeGVsX29mZmljZV8zNV9hX2N1dGVfZG9nX2FuZF9jYXRfc2l0dGluZ190b2dldGhlcl9pc29sYXRlZF82NTdiZmRjZC0xNzQ3LTRlNjktODc1MC0wYTk3ODliYzE2NDEucG5n.png",
+    discount: 15,
+    views: 650
+  },
+  {
+    name: "Bát ăn đôi cho chó mèo",
+    price: 90000,
+    category: "Phụ kiện",
+    image: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTExL3Jhd3BpeGVsX29mZmljZV8zNV9hX2N1dGVfZG9nX2FuZF9jYXRfc2l0dGluZ190b2dldGhlcl9pc29sYXRlZF82NTdiZmRjZC0xNzQ3LTRlNjktODc1MC0wYTk3ODliYzE2NDEucG5n.png",
+    discount: 20,
+    views: 380
+  },
+  {
+    name: "Chuồng nuôi thỏ kích thước lớn",
+    price: 450000,
+    category: "Chuồng trại",
+    image: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTExL3Jhd3BpeGVsX29mZmljZV8zNV9hX2N1dGVfZG9nX2FuZF9jYXRfc2l0dGluZ190b2dldGhlcl9pc29sYXRlZF82NTdiZmRjZC0xNzQ3LTRlNjktODc1MC0wYTk3ODliYzE2NDEucG5n.png",
+    discount: 30,
+    views: 200
+  },
+  {
+    name: "Thức ăn ướt cho mèo Sheba",
+    price: 180000,
+    category: "Thức ăn",
+    image: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTExL3Jhd3BpeGVsX29mZmljZV8zNV9hX2N1dGVfZG9nX2FuZF9jYXRfc2l0dGluZ190b2dldGhlcl9pc29sYXRlZF82NTdiZmRjZC0xNzQ3LTRlNjktODc1MC0wYTk3ODliYzE2NDEucG5n.png",
+    discount: 15,
+    views: 550
+  },
+  {
+    name: "Lược chải lông cho chó mèo",
+    price: 70000,
+    category: "Chăm sóc",
+    image: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTExL3Jhd3BpeGVsX29mZmljZV8zNV9hX2N1dGVfZG9nX2FuZF9jYXRfc2l0dGluZ190b2dldGhlcl9pc29sYXRlZF82NTdiZmRjZC0xNzQ3LTRlNjktODc1MC0wYTk3ODliYzE2NDEucG5n.png",
+    discount: 10,
+    views: 320
+  },
+  {
+    name: "Đồ chơi dây thừng cho chó",
+    price: 60000,
+    category: "Đồ chơi",
+    image: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTExL3Jhd3BpeGVsX29mZmljZV8zNV9hX2N1dGVfZG9nX2FuZF9jYXRfc2l0dGluZ190b2dldGhlcl9pc29sYXRlZF82NTdiZmRjZC0xNzQ3LTRlNjktODc1MC0wYTk3ODliYzE2NDEucG5n.png",
+    discount: 25,
+    views: 700
+  },
+  {
+    name: "Yếm đeo phản quang cho chó",
+    price: 110000,
+    category: "Phụ kiện",
+    image: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTExL3Jhd3BpeGVsX29mZmljZV8zNV9hX2N1dGVfZG9nX2FuZF9jYXRfc2l0dGluZ190b2dldGhlcl9pc29sYXRlZF82NTdiZmRjZC0xNzQ3LTRlNjktODc1MC0wYTk3ODliYzE2NDEucG5n.png",
+    discount: 20,
+    views: 400
+  },
+  {
+    name: "Nhà cây cho mèo cào móng",
+    price: 350000,
+    category: "Phụ kiện",
+    image: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTExL3Jhd3BpeGVsX29mZmljZV8zNV9hX2N1dGVfZG9nX2FuZF9jYXRfc2l0dGluZ190b2dldGhlcl9pc29sYXRlZF82NTdiZmRjZC0xNzQ3LTRlNjktODc1MC0wYTk3ODliYzE2NDEucG5n.png",
+    discount: 15,
+    views: 270
+  }
 ];
 
 async function seedDB() {

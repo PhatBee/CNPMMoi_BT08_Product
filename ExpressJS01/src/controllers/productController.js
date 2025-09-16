@@ -1,4 +1,4 @@
-const { getProductsPaginated, indexProduct, getCategoriesService, getProductByIdService } = require('../services/productService');
+const { getProductsPaginated, indexProduct, getCategoriesService, getProductByIdService, getSimilarProductsService } = require('../services/productService');
 const esClient = require('../configs/elasticsearch');
 const Product = require('../models/product');
 
@@ -166,4 +166,15 @@ async function getProductById(req, res) {
     }
 }
 
-module.exports = { listProducts, searchProducts, reindexAllProducts, getCategories, getProductById };
+async function getSimilarProducts(req, res) {
+    try {
+        const { id } = req.params;
+        const similarProducts = await getSimilarProductsService(id);
+        res.json(similarProducts);
+    } catch (err) {
+        console.error('getSimilarProducts error', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+
+module.exports = { listProducts, searchProducts, reindexAllProducts, getCategories, getProductById, getSimilarProducts };

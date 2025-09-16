@@ -35,6 +35,7 @@ function ProductSearch({ onSearch }) {
             <Select>
               <Select.Option value="all">Tất cả</Select.Option>
               <Select.Option value="Chăm sóc">Chăm sóc</Select.Option>
+              <Select.Option value="Chuồng trại">Chuồng trại</Select.Option>
               <Select.Option value="Đồ chơi">Đồ chơi</Select.Option>
               <Select.Option value="Phụ kiện">Phụ kiện</Select.Option>
               <Select.Option value="Thức ăn">Thức ăn</Select.Option>

@@ -27,6 +27,7 @@ async function indexProduct(product) {
     index: "products",
     id: product._id.toString(),
     body: {
+      id: product._id.toString(),
       name: product.name,
       category: product.category,
       price: product.price,
@@ -49,4 +50,20 @@ async function getProductByIdService(productId) {
   return product;
 }
 
-module.exports = { getProductsPaginated, indexProduct, getCategoriesService, getProductByIdService };
+async function getSimilarProductsService(productId, limit = 4) {
+  if (!productId) throw new Error("Product ID is required");
+  const product = await Product.findById(productId);
+  if (!product) throw new Error("Product not found");
+
+  const products = await Product.find({
+    _id: { $ne: productId },
+    category: product.category
+  })
+    .sort({ createdAt: -1 })
+    .limit(limit)
+    .lean();
+
+  return products;
+}
+
+module.exports = { getProductsPaginated, indexProduct, getCategoriesService, getProductByIdService, getSimilarProductsService };

@@ -1,16 +1,30 @@
 import React from 'react';
+import { Card } from "antd";
+
 
 export default function ProductCard({ product }) {
   return (
-    <div className="product-card">
-      <div className="product-image">
-        {product.image ? <img src={product.image} alt={product.name} /> : <div className="no-image">No Image</div>}
-      </div>
-      <div className="product-body">
-        <h3>{product.name}</h3>
-        <div className="price">{product.price ? `${product.price} đ` : 'Giá: liên hệ'}</div>
-        <div className="category">{product.category}</div>
-      </div>
-    </div>
+    <Card
+      hoverable
+      cover={
+        product.image ? (
+          <img alt={product.name} src={product.image} style={{ height: 200, objectFit: "cover" }} />
+        ) : (
+          <div style={{ height: 200, background: "#f0f0f0", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            No Image
+          </div>
+        )
+      }
+    >
+      <Card.Meta
+        title={product.name}
+        description={
+          <>
+            <div><b>Giá:</b> {product.price ? `${product.price.toLocaleString()} đ` : "Liên hệ"}</div>
+            <div><b>Danh mục:</b> {product.category}</div>
+          </>
+        }
+      />
+    </Card>
   );
 }

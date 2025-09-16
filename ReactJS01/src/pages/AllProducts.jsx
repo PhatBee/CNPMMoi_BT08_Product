@@ -1,9 +1,13 @@
 import React, { useRef, useEffect } from 'react';
+import { Row, Col, Spin, Divider, Button, Typography, Card } from "antd";
 import useProducts from '../hook/useProducts';
 import ProductList from '../components/ProductList';
 import {searchProductsApi} from '../util/api';
 import ProductSearch from '../components/ProductSearch';
 import { useState } from 'react';
+
+const { Title } = Typography;
+
 
 export default function AllProducts() {
     // default category 'all', limit 12
@@ -47,70 +51,52 @@ export default function AllProducts() {
   };
 
   return (
-    <div>
-      <h2>Tất cả sản phẩm</h2>
+    <Row justify="center" style={{ marginTop: 30 }}>
+      <Col xs={24} md={22} lg={20}>
+        <Card>
+          <Title level={3}>Tất cả sản phẩm</Title>
 
-       {/* ✅ Thanh tìm kiếm */}
-      <ProductSearch onSearch={handleSearch} />
+          {/* Thanh tìm kiếm */}
+          <ProductSearch onSearch={handleSearch} />
 
-      {/* example category selector
-      <div style={{ marginBottom: 16 }}>
-        <button onClick={() => changeCategory('all')} disabled={currentCategory === 'all'}>Tất cả</button>
-        <button onClick={() => changeCategory('skincare')} disabled={currentCategory === 'skincare'}>Skincare</button>
-        <button onClick={() => changeCategory('makeup')} disabled={currentCategory === 'makeup'}>Makeup</button>
-      </div> */}
+          {/* Bộ lọc danh mục */}
+          {!isSearching && (
+            <div style={{ margin: "16px 0" }}>
+              {["all", "Chăm sóc", "Đồ chơi", "Phụ kiện", "Thức ăn"].map((cat) => (
+                <Button
+                  key={cat}
+                  type={currentCategory === cat ? "primary" : "default"}
+                  onClick={() => changeCategory(cat)}
+                  style={{ marginRight: 8 }}
+                >
+                  {cat === "all" ? "Tất cả" : cat}
+                </Button>
+              ))}
+            </div>
+          )}
 
-       {/* Bộ lọc danh mục (chỉ khi không search) */}
-      {!isSearching && (
-        <div style={{ marginBottom: 16 }}>
-          <button
-            onClick={() => changeCategory("all")}
-            disabled={currentCategory === "all"}
-          >
-            Tất cả
-          </button>
-          <button
-            onClick={() => changeCategory("Chăm sóc")}
-            disabled={currentCategory === "Chăm sóc"}
-          >
-            Chăm sóc
-          </button>
-          <button
-            onClick={() => changeCategory("Đồ chơi")}
-            disabled={currentCategory === "Đồ chơi"}
-          >
-            Đồ chơi
-          </button>
-          <button
-            onClick={() => changeCategory("Phụ kiện")}
-            disabled={currentCategory === "Phụ kiện"}
-          >
-            Phụ kiện
-          </button>
-          <button
-            onClick={() => changeCategory("Thức ăn")}
-            disabled={currentCategory === "Thức ăn"}
-          >
-            Thức ăn
-          </button>
-        </div>
-      )}
+          <Divider />
 
-      {/* Hiển thị kết quả search nếu có */}
-      {isSearching ? (
-        <ProductList products={searchResults} />
-      ) : (
-        <>
-          <ProductList products={products} />
+          {/* Danh sách sản phẩm */}
+          {isSearching ? (
+            <ProductList products={searchResults} />
+          ) : (
+            <>
+              <ProductList products={products} />
 
-          {/* loader sentinel */}
-          <div ref={loaderRef} style={{ height: 1 }} />
+              <div ref={loaderRef} style={{ height: 1 }} />
 
-          {loading && <div>Loading...</div>}
-          {error && <div>Có lỗi xảy ra</div>}
-          {!hasMore && <div>Đã tải hết sản phẩm</div>}
-        </>
-      )}
-    </div>
+              {loading && (
+                <div style={{ textAlign: "center", padding: 16 }}>
+                  <Spin />
+                </div>
+              )}
+              {error && <div>Có lỗi xảy ra</div>}
+              {!hasMore && <div style={{ textAlign: "center", marginTop: 12 }}>Đã tải hết sản phẩm</div>}
+            </>
+          )}
+        </Card>
+      </Col>
+    </Row>
   );
 }

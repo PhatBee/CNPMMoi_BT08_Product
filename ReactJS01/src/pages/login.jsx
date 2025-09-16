@@ -17,6 +17,7 @@ const LoginPage = () => {
                 message: "LOGIN USER",
                 description: "Success"
             });
+            console.log("Check user: ", res?.user?.email ?? "");
             setAuth({
                 isAuthenticated: true,
                 user: {

@@ -8,7 +8,7 @@ const createUserService = async (name, email, password) => {
     try {
         // Kiểm tra user có tồn tại
         const user = await User.findOne({ email });
-        if (user){
+        if (user) {
             console.log("User already exists");
             return null;
         }
@@ -34,7 +34,7 @@ const loginService = async (email, password) => {
     try {
         // Lấy thông tin user
         const user = await User.findOne({ email: email });
-        if (user){
+        if (user) {
             // Kiểm tra password
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
@@ -50,7 +50,7 @@ const loginService = async (email, password) => {
                 }
 
                 const access_token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
-                
+
                 return {
                     EC: 0,
                     access_token,
@@ -83,8 +83,32 @@ const getUserService = async () => {
     }
 }
 
+const getAccountService = async (req, res) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.status(401).json({ message: "No token provided" });
+
+    const token = authHeader.split(" ")[1];
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        // lấy user từ DB (để chắc chắn user còn tồn tại)
+        const user = await User.findOne({ email: decoded.email }).select("email name");
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        return res.json({
+            email: user.email,
+            name: user.name,
+        });
+    } catch (error) {
+        return res.status(401).json({ message: "Invalid or expired token" });
+    }
+};
 module.exports = {
     createUserService,
     loginService,
-    getUserService
+    getUserService,
+    getAccountService
 }

@@ -49,3 +49,17 @@ export const searchProductsApi = async (filters) => {
         return { products: [] };
     } 
 };
+
+export const getMeApi = async (token) => {
+    const URL_API = "/v1/api/me";
+    try {
+        const res = await axios.get(URL_API, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log("Get user raw: ", res);
+        return res;
+    } catch (err) {
+        console.error("Get user error: ", err);
+        return null;
+    }
+};

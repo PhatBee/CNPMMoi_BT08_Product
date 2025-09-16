@@ -1,5 +1,7 @@
 // src/components/ProductList.jsx
 import React from 'react';
+import { Row, Col } from "antd";
+
 import ProductCard from './ProductCard';
 
 export default function ProductList({ products }) {
@@ -7,11 +9,13 @@ export default function ProductList({ products }) {
     return <div>Không có sản phẩm</div>;
   }
   return (
-    <div className="product-grid">
-      {products.map(p => (
-        <ProductCard key={p._id} product={p} />
+    <Row gutter={[16, 16]}>
+      {products.map((p) => (
+        <Col xs={24} sm={12} md={8} lg={6} key={p._id}>
+          <ProductCard product={p} />
+        </Col>
       ))}
-    </div>
+    </Row>
   );
 }
 

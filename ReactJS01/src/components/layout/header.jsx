@@ -22,13 +22,19 @@ const Header = () => {
         }] : []),
 
         {
-            label: `Welcome ${auth?.user?.email ?? ""}`,
-            key: 'SSubMenu',
+            label: <Link to="/products">Products</Link>,
+            key: "products",
+            icon: <SettingOutlined />,
+        },
+
+        {
+            label: `Welcome ${auth?.user?.name ?? ""}`,
+            key: 'SubMenu',
             icon: <SettingOutlined />,
             children: [
                 ...(auth.isAuthenticated ? [{
                     label: <span onClick={() => {
-                        localStorage.clear("access_token");
+                        localStorage.removeItem("access_token");
                         setCurrent("home");
                         setAuth({
                             isAuthenticated: false,
